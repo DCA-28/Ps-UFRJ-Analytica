@@ -4,78 +4,98 @@ import pandas as pd
 
 
 def all_moves(position: str) -> str:
-    hori_cord = position[
+    hori_coord = position[
         0
     ]  # represents the letter in the position (horizontal coordinate)
-    vert_cord = position[
+    vert_coord = position[
         1
     ]  # represents the number in the position (vertical coordinate)
-    possible_cords = set([])
+    possible_coords = []
 
     # goes two places up and one place left
-    final_ver = ord(vert_cord) + 2
-    final_hor = ord(hori_cord) - 1
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) + 2
+    final_hori = ord(hori_coord) - 1
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes two places up and one place rigth
-    final_ver = ord(vert_cord) + 2
-    final_hor = ord(hori_cord) + 1
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) + 2
+    final_hori = ord(hori_coord) + 1
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes one place up and two places left
-    final_ver = ord(vert_cord) + 1
-    final_hor = ord(hori_cord) - 2
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) + 1
+    final_hori = ord(hori_coord) - 2
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes one place up and two places rigth
-    final_ver = ord(vert_cord) + 1
-    final_hor = ord(hori_cord) + 2
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) + 1
+    final_hori = ord(hori_coord) + 2
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes two places down and one place left
-    final_ver = ord(vert_cord) - 2
-    final_hor = ord(hori_cord) - 1
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) - 2
+    final_hori = ord(hori_coord) - 1
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes two places down and one place rigth
-    final_ver = ord(vert_cord) - 2
-    final_hor = ord(hori_cord) + 1
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) - 2
+    final_hori = ord(hori_coord) + 1
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes one place down and two places left
-    final_ver = ord(vert_cord) - 1
-    final_hor = ord(hori_cord) - 2
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) - 1
+    final_hori = ord(hori_coord) - 2
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
     # goes one place down and two places rigth
-    final_ver = ord(vert_cord) - 1
-    final_hor = ord(hori_cord) + 2
-    final_cords = chr(final_hor) + chr(final_ver)
-    possible_cords.add(final_cords)
+    final_vert = ord(vert_coord) - 1
+    final_hori = ord(hori_coord) + 2
+    final_cords = chr(final_hori) + chr(final_vert)
+    possible_coords.append(final_cords)
 
-    print(possible_cords)
-    return possible_cords
+    print(possible_coords)
+    return possible_coords
+
+
+def possible_moves(possible_coords: list) -> list:
+    possible_moves = []
+    for coordinates in possible_coords:
+        hori_coord = coordinates[0]
+        verti_coord = coordinates[1]
+        if (
+            ord(hori_coord) > 104 or ord(hori_coord) < 97
+        ):  # whether the horse has crossed the left or right limit
+            print(f"Ops limit transpassed: {hori_coord}")
+            continue
+        elif (
+            ord(verti_coord) > 56 or ord(verti_coord) < 49
+        ):  # whether the horse has crossed the upper or loewr limit
+            print(f"Ops limit transpassed: {verti_coord}")
+            continue
+        else:
+            possible_moves.append((coordinates))
+    return possible_moves
 
 
 class ChessBoard:
     def __init__(self) -> None:
         self.board = pd.DataFrame(
             {
-                "a": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "b": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "c": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "d": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "e": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "f": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "g": ["*", "*", "*", "*", "*", "*", "*", "*"],
-                "h": ["*", "*", "*", "*", "*", "*", "*", "*"],
+                "a": [".", ".", ".", ".", ".", ".", ".", "."],
+                "b": [".", ".", ".", ".", ".", ".", ".", "."],
+                "c": [".", ".", ".", ".", ".", ".", ".", "."],
+                "d": [".", ".", ".", ".", ".", ".", ".", "."],
+                "e": [".", ".", ".", ".", ".", ".", ".", "."],
+                "f": [".", ".", ".", ".", ".", ".", ".", "."],
+                "g": [".", ".", ".", ".", ".", ".", ".", "."],
+                "h": [".", ".", ".", ".", ".", ".", ".", "."],
             },
             index=[i + 1 for i in range(8)],
         )
@@ -95,9 +115,10 @@ class ChessBoard:
 def main():
     initial_pos, final_pos = input().split()
     moves = all_moves(initial_pos)
-    # places = all_moves()
+    valid_moves = possible_moves(moves)
+    # creating the chess board, stamping the moves on it and printing this board
     board = ChessBoard()
-    board.stamp_moves(initial_pos, moves)
+    board.stamp_moves(initial_pos, valid_moves)
     marked_places = board.get_board()
     print(marked_places)
 
