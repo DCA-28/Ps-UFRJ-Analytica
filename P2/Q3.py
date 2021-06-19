@@ -40,7 +40,7 @@ class CashMachine:
             self.withdraw_dict[0.01] += 1
         return self.withdraw_dict
 
-    # getter method
+    # function to print the withdraw
     def cash_returned(self, total_value):
         print(f">> {total_value}", end="\n\n")
         print("NOTAS:")
