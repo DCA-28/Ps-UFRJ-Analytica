@@ -1,6 +1,3 @@
-# Solution of the first question, group P2
-#todo: comment and test again
-
 def average_value() -> float:
     integer_values = []
     while True:
@@ -28,6 +25,4 @@ def average_value() -> float:
 def main():
     average_value()
 
-
-if __name__ == "__main__":
-    main()
+main()
