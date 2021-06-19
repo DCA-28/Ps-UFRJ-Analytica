@@ -1,3 +1,5 @@
+import math
+
 class CashMachine:
     def __init__(self):
         self.cash_notes = [100, 50, 20, 10, 5, 2]
@@ -25,7 +27,6 @@ class CashMachine:
             if units > 0:
                 amount -= units * note
                 self.withdraw_dict[note] += units
-        # converting the remaining to two decimal places
         remaining_amount = amount
         # and let's fetch the coins
         for coin in self.cash_coins:
@@ -33,7 +34,10 @@ class CashMachine:
             if units > 0:
                 remaining_amount -= units * coin
                 self.withdraw_dict[coin] += units
-            # print(remaining_amount)
+        #verifying if the lost due the innerent limitation to represent float numbers caused some miss counted
+        #value, in that case we sum 0.01 to the amount that will be withdrawn """
+        if magnitude(remaining_amount) == -3:
+            self.withdraw_dict[0.01] += 1
         return self.withdraw_dict
 
     # getter method
@@ -47,12 +51,14 @@ class CashMachine:
         for coin in self.cash_coins:
             print(f"{self.withdraw_dict[coin]:.0f} moeda(s) de R$ {coin:.2f}")
 
+# calculates a number's order of magnitude
+def magnitude(number):
+    return math.floor(math.log(number, 10))
 
 def main():
     value = float(input())
     cash_machine = CashMachine()
     cash_machine.withdraw(value)
     cash_machine.cash_returned(value)
-
 
 main()
